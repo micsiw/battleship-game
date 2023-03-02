@@ -15,6 +15,7 @@ const Ship = (size) => {
 
   return {
     getHealth: () => health,
+    getSize: () => size,
     hit,
     isSunk,
   };
