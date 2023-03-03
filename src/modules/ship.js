@@ -2,7 +2,9 @@ const Ship = (size) => {
   let health = size;
   let sunk = false;
 
-  const hit = () => health--;
+  const hit = () => {
+    health -= 1;
+  };
 
   const isSunk = () => {
     if (health < 1) {

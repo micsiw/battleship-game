@@ -1,12 +1,12 @@
-import types from "./shipTypes.js";
+import types from "./shipTypes";
 
 const size = 100;
 
-const Gameboard = () => {
-  let board = [];
+const GameBoard = () => {
+  const board = [];
 
-  function initialize(size) {
-    for (let i = 0; i < size; i++) {
+  function initialize(boardSize) {
+    for (let i = 0; i < boardSize; i++) {
       const field = {
         occupied: null,
         visited: false,
@@ -26,7 +26,28 @@ const Gameboard = () => {
     }
   };
 
-  return { board, placeShip };
+  const receiveAttack = (coordinates) => {
+    if (board[coordinates].visited === true) {
+      console.log("Field was already used");
+    }
+    if (board[coordinates].occupied !== null) {
+      console.log("Ship was striked");
+      board[coordinates].occupied.hit();
+    }
+    board[coordinates].visited = true;
+  };
+
+  const areAllSunk = () => {
+    let areSunk = true;
+    board.forEach((field) => {
+      if (field.occupied !== null && field.occupied.isSunk() === false) {
+        areSunk = false;
+      }
+    });
+    return areSunk;
+  };
+
+  return { board, placeShip, receiveAttack, areAllSunk };
 };
 
-export default Gameboard;
+export default GameBoard;
