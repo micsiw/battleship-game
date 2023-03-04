@@ -1,26 +1,20 @@
 import { size } from "./gameboard";
 
-function initializeGameBoard() {
-  const playerBoard = document.querySelector(".player-gameboard");
-  const enemyBoard = document.querySelector(".opponent-gameboard");
+function initializeGameBoard(board) {
+  const boardContainer = document.querySelector(".gameboards");
+  const newBoard = document.createElement("div");
 
-  playerBoard.style.display = "grid";
-  playerBoard.style.gridTemplateColumns = `repeat(${Math.sqrt(size)}, 1fr)`;
+  newBoard.style.display = "grid";
+  newBoard.style.gridTemplateColumns = `repeat(${Math.sqrt(size)}, 1fr)`;
 
-  enemyBoard.style.display = "grid";
-  enemyBoard.style.gridTemplateColumns = `repeat(${Math.sqrt(size)}, 1fr)`;
+  board.board.forEach((field) => {
+    const drawField = document.createElement("div");
+    drawField.classList.add("field");
+    if (field.occupied !== null) drawField.style.backgroundColor = "yellow";
+    newBoard.appendChild(drawField);
+  });
 
-  for (let i = 0; i < size; i++) {
-    const field = document.createElement("div");
-    field.classList.add("field");
-    playerBoard.appendChild(field);
-  }
-
-  for (let i = 0; i < size; i++) {
-    const field = document.createElement("div");
-    field.classList.add("field");
-    enemyBoard.appendChild(field);
-  }
+  boardContainer.appendChild(newBoard);
 }
 
 export { initializeGameBoard };
