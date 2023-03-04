@@ -51,3 +51,4 @@ const GameBoard = () => {
 };
 
 export default GameBoard;
+export { size };

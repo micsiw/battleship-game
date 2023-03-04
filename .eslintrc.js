@@ -9,7 +9,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  ignorePatterns: ["**/src/modules/tests"],
+  ignorePatterns: ["**/src/modules/tests", "**/dist/main.js"],
   rules: {
     "no-plusplus": [2, { allowForLoopAfterthoughts: true }],
   },
