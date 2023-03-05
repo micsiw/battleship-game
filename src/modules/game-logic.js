@@ -9,7 +9,11 @@ function randomlyPlaceShips(player, board) {
   for (let i = 0; i < shipsCount; i++) {
     const shipName = playerShips.pop();
     const randomCoordinates = Math.floor(Math.random() * size);
-    board.placeShip(shipName, randomCoordinates);
+    const placeShip = board.placeShip(shipName, randomCoordinates);
+    if (placeShip === false) {
+      playerShips.push(shipName);
+      i -= 1;
+    }
   }
 }
 
