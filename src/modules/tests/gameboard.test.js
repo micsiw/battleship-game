@@ -3,15 +3,27 @@ import GameBoard from "../gameboard";
 const randomGameBoard = GameBoard();
 
 test("Check if ship was properly added on game board", () => {
-  randomGameBoard.placeShip("Destroyer", 60);
-  expect(randomGameBoard.board[59].occupied).toBe(null);
+  randomGameBoard.placeShip("Destroyer", 60, true);
+  expect(randomGameBoard.board[59].occupied).toBe("blocked");
   expect(randomGameBoard.board[60].occupied).not.toBe(null);
   expect(randomGameBoard.board[61].occupied).not.toBe(null);
-  expect(randomGameBoard.board[62].occupied).toBe(null);
+  expect(randomGameBoard.board[62].occupied).toBe("blocked");
+});
+
+test("Check if ship has properly added buffer on fields around him", () => {
+  randomGameBoard.placeShip("Destroyer", 2, true);
+  expect(randomGameBoard.board[1].occupied).toBe("blocked");
+  expect(randomGameBoard.board[2].occupied).not.toBe(null);
+  expect(randomGameBoard.board[3].occupied).not.toBe(null);
+  expect(randomGameBoard.board[4].occupied).toBe("blocked");
+  expect(randomGameBoard.board[11].occupied).toBe("blocked");
+  expect(randomGameBoard.board[12].occupied).toBe("blocked");
+  expect(randomGameBoard.board[13].occupied).toBe("blocked");
+  expect(randomGameBoard.board[14].occupied).toBe("blocked");
 });
 
 test("Check if ship was properly hit after receiving attack, and miss was noticed", () => {
-  randomGameBoard.placeShip("Carrier", 43);
+  randomGameBoard.placeShip("Carrier", 43, true);
   expect(randomGameBoard.board[43].occupied).not.toBe(null);
   expect(randomGameBoard.board[47].occupied).not.toBe(null);
   expect(randomGameBoard.board[43].occupied.getHealth()).toBe(5);
@@ -29,7 +41,7 @@ const newGameBoard = GameBoard();
 
 test("Check if board properly report all ships destroyed", () => {
   expect(newGameBoard.areAllSunk()).toBe(true);
-  newGameBoard.placeShip("Destroyer", 22);
+  newGameBoard.placeShip("Destroyer", 22, true);
   expect(newGameBoard.areAllSunk()).toBe(false);
   newGameBoard.receiveAttack(22);
   newGameBoard.receiveAttack(23);

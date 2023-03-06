@@ -14,6 +14,7 @@ function randomlyPlaceShips(player, board) {
       playerShips.push(shipName);
       i -= 1;
     }
+    console.log(`ship allowed:${placeShip}`);
   }
 }
 

@@ -1,12 +1,12 @@
 const Player = (name) => {
   const turn = false;
   const ships = [
-    "Carrier",
-    "Battleship",
-    "Cruiser",
+    "Destroyer",
+    "Destroyer",
     "Submarine",
-    "Destroyer",
-    "Destroyer",
+    "Cruiser",
+    "Battleship",
+    "Carrier",
   ];
 
   return { name, turn, ships };

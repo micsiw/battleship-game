@@ -7,10 +7,13 @@ function initializeGameBoard(board) {
   newBoard.style.display = "grid";
   newBoard.style.gridTemplateColumns = `repeat(${Math.sqrt(size)}, 1fr)`;
 
-  board.board.forEach((field) => {
+  board.board.forEach((field, index) => {
     const drawField = document.createElement("div");
     drawField.classList.add("field");
-    if (field.occupied !== null) drawField.style.backgroundColor = "yellow";
+    drawField.dataset.field = index;
+    if (field.occupied !== null && field.occupied !== "blocked")
+      drawField.style.backgroundColor = "yellow";
+    if (field.occupied === "blocked") drawField.style.backgroundColor = "pink";
     newBoard.appendChild(drawField);
   });
 
