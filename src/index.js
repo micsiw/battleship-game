@@ -1,3 +1,4 @@
-import { initializeGame } from "./modules/game-logic";
+import { initializeGame, updateBoards } from "./modules/interface";
 
 initializeGame();
+updateBoards();

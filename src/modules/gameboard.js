@@ -22,11 +22,9 @@ const GameBoard = () => {
   initialize(size);
 
   const placeShip = (type, coordinates, horizontal = getRandomBoolean()) => {
-    console.log(type, coordinates);
     const ship = types[type];
     const shipSize = ship.getSize();
     const isHorizontal = horizontal;
-    console.log(`horizontal:${isHorizontal}`);
 
     const horizontalBorder = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     const verticalBorder = [100, 101, 102, 103, 104, 105, 106, 107, 108, 109];
@@ -88,9 +86,6 @@ const GameBoard = () => {
           if (field >= 0 && field < 100) board[field].occupied = "blocked";
         });
       }
-
-      // dokoncz logike zeby bufery sie dobrze pojawialy
-
       return true;
     }
     if (isHorizontal === false && checkIfCoordinatesValid() === true) {
@@ -149,12 +144,16 @@ const GameBoard = () => {
   const receiveAttack = (coordinates) => {
     if (board[coordinates].visited === true) {
       console.log("Field was already used");
-    }
-    if (board[coordinates].occupied !== null) {
+    } else if (
+      board[coordinates].occupied !== null &&
+      board[coordinates].occupied !== "blocked"
+    ) {
       console.log("Ship was striked");
       board[coordinates].occupied.hit();
+      board[coordinates].visited = true;
+    } else {
+      board[coordinates].visited = true;
     }
-    board[coordinates].visited = true;
   };
 
   const areAllSunk = () => {
